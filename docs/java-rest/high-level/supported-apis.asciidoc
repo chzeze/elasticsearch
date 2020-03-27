@@ -11,6 +11,7 @@ The Java High Level REST Client supports the following Document APIs:
 Single document APIs::
 * <<{upid}-index>>
 * <<{upid}-get>>
+* <<{upid}-get-source>>
 * <<{upid}-exists>>
 * <<{upid}-delete>>
 * <<{upid}-update>>
@@ -28,6 +29,7 @@ Multi-document APIs::
 
 include::document/index.asciidoc[]
 include::document/get.asciidoc[]
+include::document/get-source.asciidoc[]
 include::document/exists.asciidoc[]
 include::document/delete.asciidoc[]
 include::document/update.asciidoc[]
@@ -293,6 +295,7 @@ The Java High Level REST Client supports the following Machine Learning APIs:
 * <<{upid}-put-calendar-job>>
 * <<{upid}-delete-calendar-job>>
 * <<{upid}-delete-calendar>>
+* <<{upid}-estimate-model-memory>>
 * <<{upid}-get-data-frame-analytics>>
 * <<{upid}-get-data-frame-analytics-stats>>
 * <<{upid}-put-data-frame-analytics>>
@@ -349,6 +352,7 @@ include::ml/delete-calendar-event.asciidoc[]
 include::ml/put-calendar-job.asciidoc[]
 include::ml/delete-calendar-job.asciidoc[]
 include::ml/delete-calendar.asciidoc[]
+include::ml/estimate-model-memory.asciidoc[]
 include::ml/get-data-frame-analytics.asciidoc[]
 include::ml/get-data-frame-analytics-stats.asciidoc[]
 include::ml/put-data-frame-analytics.asciidoc[]

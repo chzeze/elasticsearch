@@ -129,8 +129,8 @@ public class RoundingTests extends ESTestCase {
         Rounding tzRounding = Rounding.builder(Rounding.DateTimeUnit.DAY_OF_MONTH)
             .timeZone(ZoneOffset.ofHours(timezoneOffset)).build();
         assertThat(tzRounding.round(0), equalTo(0L - TimeValue.timeValueHours(24 + timezoneOffset).millis()));
-        assertThat(tzRounding.nextRoundingValue(0L - TimeValue.timeValueHours(24 + timezoneOffset).millis()), equalTo(0L - TimeValue
-            .timeValueHours(timezoneOffset).millis()));
+        assertThat(tzRounding.nextRoundingValue(0L - TimeValue.timeValueHours(24 + timezoneOffset).millis()), equalTo(TimeValue
+            .timeValueHours(-timezoneOffset).millis()));
 
         ZoneId tz = ZoneId.of("-08:00");
         tzRounding = Rounding.builder(Rounding.DateTimeUnit.DAY_OF_MONTH).timeZone(tz).build();
@@ -201,10 +201,18 @@ public class RoundingTests extends ESTestCase {
         Rounding rounding = Rounding.builder(Rounding.DateTimeUnit.DAY_OF_MONTH).offset(twoHours).build();
         assertThat(rounding.round(0), equalTo(-oneDay + twoHours));
         assertThat(rounding.round(twoHours), equalTo(twoHours));
+        assertThat(rounding.nextRoundingValue(-oneDay), equalTo(-oneDay + twoHours));
+        assertThat(rounding.nextRoundingValue(0), equalTo(twoHours));
+        assertThat(rounding.withoutOffset().round(0), equalTo(0L));
+        assertThat(rounding.withoutOffset().nextRoundingValue(0), equalTo(oneDay));
 
         rounding = Rounding.builder(Rounding.DateTimeUnit.DAY_OF_MONTH).offset(-twoHours).build();
         assertThat(rounding.round(0), equalTo(-twoHours));
         assertThat(rounding.round(oneDay - twoHours), equalTo(oneDay - twoHours));
+        assertThat(rounding.nextRoundingValue(-oneDay), equalTo(-twoHours));
+        assertThat(rounding.nextRoundingValue(0), equalTo(oneDay - twoHours));
+        assertThat(rounding.withoutOffset().round(0), equalTo(0L));
+        assertThat(rounding.withoutOffset().nextRoundingValue(0), equalTo(oneDay));
     }
 
     /**
